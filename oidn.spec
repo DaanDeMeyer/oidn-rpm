@@ -1,6 +1,6 @@
 Name:		oidn
-Version:	0.8.2
-Release:	4%{?dist}
+Version:	0.9.0
+Release:	1%{?dist}
 Summary:	Library of denoising filters for images rendered with ray tracing
 
 License:	ASL 2.0
@@ -44,19 +44,16 @@ The %{name}-docs package contains documentation for %{name}.
 %prep
 %autosetup
 
-
 %build
 %cmake -DCMAKE_VERBOSE_MAKEFILE:BOOL=TRUE \
 	.
 %make_build
-
 
 %install
 %make_install
 
 # Remove duplicated documentation
 rm -rf %{buildroot}%{_docdir}/OpenImageDenoise
-
 
 %files
 %license LICENSE.txt
@@ -75,6 +72,9 @@ rm -rf %{buildroot}%{_docdir}/OpenImageDenoise
 %{_libdir}/libOpenImageDenoise.so
 
 %changelog
+* Thu May 09 2019 Luya Tshimbalanga <luya@fedoraproject.org> - 0.9.0-1
+- Update to 0.9.0
+
 * Tue Apr 02 2019 Luya Tshimbalanga <luya@fedoraproject.org> - 0.8.2-4
 - Use spaces on line 47
 - Make -doc subpackage noarch
