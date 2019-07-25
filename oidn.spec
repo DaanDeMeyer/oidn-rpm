@@ -1,6 +1,6 @@
 Name:		oidn
 Version:	0.9.0
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Library of denoising filters for images rendered with ray tracing
 
 License:	ASL 2.0
@@ -72,6 +72,9 @@ rm -rf %{buildroot}%{_docdir}/OpenImageDenoise
 %{_libdir}/libOpenImageDenoise.so
 
 %changelog
+* Thu Jul 25 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
 * Thu May 09 2019 Luya Tshimbalanga <luya@fedoraproject.org> - 0.9.0-1
 - Update to 0.9.0
 
