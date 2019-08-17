@@ -1,6 +1,6 @@
 Name:		oidn
-Version:	0.9.0
-Release:	2%{?dist}
+Version:	1.0.0
+Release:	1%{?dist}
 Summary:	Library of denoising filters for images rendered with ray tracing
 
 License:	ASL 2.0
@@ -12,7 +12,7 @@ ExclusiveArch:	x86_64
 
 BuildRequires:	cmake >= 3.13.0
 BuildRequires:	gcc-c++
-BuildRequires:	python3-devel
+BuildRequires:	pkgconfig(python3)
 BuildRequires:	tbb-devel
 
 %description
@@ -72,6 +72,10 @@ rm -rf %{buildroot}%{_docdir}/OpenImageDenoise
 %{_libdir}/libOpenImageDenoise.so
 
 %changelog
+* Sat Aug 17 2019 Luya Tshimbalanga <luya@fedoraproject.org> - 1.0.0-1
+- Update to 1.0.0
+- Use pkgconfig for Python 3
+
 * Thu Jul 25 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
