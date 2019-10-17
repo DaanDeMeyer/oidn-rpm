@@ -1,5 +1,5 @@
 Name:		oidn
-Version:	1.0.0
+Version:	1.1.0
 Release:	1%{?dist}
 Summary:	Library of denoising filters for images rendered with ray tracing
 
@@ -72,6 +72,9 @@ rm -rf %{buildroot}%{_docdir}/OpenImageDenoise
 %{_libdir}/libOpenImageDenoise.so
 
 %changelog
+* Wed Oct 16 2019 Luya Tshimbalanga <luya@fedoraproject.org> - 1.1.0-1
+- Update to 1.1.0
+
 * Sat Aug 17 2019 Luya Tshimbalanga <luya@fedoraproject.org> - 1.0.0-1
 - Update to 1.0.0
 - Use pkgconfig for Python 3
