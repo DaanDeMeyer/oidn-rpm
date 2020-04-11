@@ -1,6 +1,6 @@
 Name:		oidn
-Version:	1.1.0
-Release:	2%{?dist}
+Version:	1.2.0
+Release:	1%{?dist}
 Summary:	Library of denoising filters for images rendered with ray tracing
 
 License:	ASL 2.0
@@ -12,8 +12,10 @@ ExclusiveArch:	x86_64
 
 BuildRequires:	cmake >= 3.13.0
 BuildRequires:	gcc-c++
+BuildRequires:	ispc
 BuildRequires:	pkgconfig(python3)
-BuildRequires:	tbb-devel
+BuildRequires:	pkgconfig(tbb)
+BuildRequires:	redhat-rpm-config
 
 %description
 An open source library of high-performance, high-quality denoising
@@ -58,7 +60,7 @@ rm -rf %{buildroot}%{_docdir}/OpenImageDenoise
 %files
 %license LICENSE.txt
 %doc CHANGELOG.md 
-%{_bindir}/denoise
+%{_bindir}/{denoise,tests}
 
 %files libs
 %{_libdir}/cmake/OpenImageDenoise
@@ -72,6 +74,10 @@ rm -rf %{buildroot}%{_docdir}/OpenImageDenoise
 %{_libdir}/libOpenImageDenoise.so
 
 %changelog
+* Fri Apr 10 2020 Luya Tshimbalanga <luya@fedoraproject.org> - 1.2.0-1
+- Update to 1.2.0
+- Add ispc and redhat-rpm-config depedencies
+
 * Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
