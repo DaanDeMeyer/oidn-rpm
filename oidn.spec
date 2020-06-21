@@ -1,5 +1,5 @@
 Name:		oidn
-Version:	1.2.0
+Version:	1.2.1
 Release:	1%{?dist}
 Summary:	Library of denoising filters for images rendered with ray tracing
 
@@ -60,7 +60,7 @@ rm -rf %{buildroot}%{_docdir}/OpenImageDenoise
 %files
 %license LICENSE.txt
 %doc CHANGELOG.md 
-%{_bindir}/{denoise,tests}
+%{_bindir}/%{name}{Denoise,Test,Benchmark}
 
 %files libs
 %{_libdir}/cmake/OpenImageDenoise
@@ -74,6 +74,9 @@ rm -rf %{buildroot}%{_docdir}/OpenImageDenoise
 %{_libdir}/libOpenImageDenoise.so
 
 %changelog
+* Tue Jun 16 2020 Luya Tshimbalanga <luya@fedoraproject.org> - 1.2.1-1
+- Update to 1.2.1
+
 * Fri Apr 10 2020 Luya Tshimbalanga <luya@fedoraproject.org> - 1.2.0-1
 - Update to 1.2.0
 - Add ispc and redhat-rpm-config depedencies
