@@ -1,5 +1,5 @@
 Name:		oidn
-Version:	1.2.1
+Version:	1.2.2
 Release:	1%{?dist}
 Summary:	Library of denoising filters for images rendered with ray tracing
 
@@ -13,6 +13,7 @@ ExclusiveArch:	x86_64
 BuildRequires:	cmake >= 3.13.0
 BuildRequires:	gcc-c++
 BuildRequires:	ispc
+BuildRequires:  pkgconfig(OpenImageIO)
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	pkgconfig(tbb)
 BuildRequires:	redhat-rpm-config
@@ -47,12 +48,14 @@ The %{name}-docs package contains documentation for %{name}.
 %autosetup
 
 %build
-%cmake -DCMAKE_VERBOSE_MAKEFILE:BOOL=TRUE \
-	.
-%make_build
+%cmake \
+ -B build \
+ -DCMAKE_VERBOSE_MAKEFILE:BOOL=TRUE \
+ .
+%make_build -C build
 
 %install
-%make_install
+%make_install -C build
 
 # Remove duplicated documentation
 rm -rf %{buildroot}%{_docdir}/OpenImageDenoise
@@ -74,6 +77,10 @@ rm -rf %{buildroot}%{_docdir}/OpenImageDenoise
 %{_libdir}/libOpenImageDenoise.so
 
 %changelog
+* Mon Jul 13 2020 Luya Tshimbalanga <luya@fedoraproject.org> - 1.2.2-1
+- Update to 1.2.2 (#1855832)
+- Add OpenImageIO dependency
+
 * Tue Jun 16 2020 Luya Tshimbalanga <luya@fedoraproject.org> - 1.2.1-1
 - Update to 1.2.1
 
