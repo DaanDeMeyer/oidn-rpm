@@ -1,6 +1,9 @@
+# Force out of source build
+%undefine __cmake_in_source_build
+
 Name:       oidn
-Version:    1.2.2
-Release:    4%{?dist}
+Version:    1.2.3
+Release:    1%{?dist}
 Summary:    Library of denoising filters for images rendered with ray tracing
 License:    ASL 2.0
 URL:        https://openimagedenoise.github.io/
@@ -48,14 +51,13 @@ The %{name}-docs package contains documentation for %{name}.
 
 %build
 %cmake \
-    -B build \
     -DCMAKE_VERBOSE_MAKEFILE:BOOL=TRUE \
     .
 
-%make_build -C build
+%cmake_build
 
 %install
-%make_install -C build
+%cmake_install
 
 # Remove duplicated documentation
 rm -rf %{buildroot}%{_docdir}/OpenImageDenoise
@@ -77,6 +79,10 @@ rm -rf %{buildroot}%{_docdir}/OpenImageDenoise
 %{_libdir}/libOpenImageDenoise.so
 
 %changelog
+* Sun Sep 13 2020 Luya Tshimbalanga <luya@fedoraproject.org> - 1.2.3-1
+- Update to 1.2.3
+- Follow new Fedora cmake guideline
+
 * Thu Aug 20 2020 Simone Caronni <negativo17@gmail.com> - 1.2.2-4
 - Move cmake files to devel subpackage.
 - rpmlint fixes.
