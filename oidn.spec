@@ -3,7 +3,7 @@
 
 Name:       oidn
 Version:    1.3.0
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    Library of denoising filters for images rendered with ray tracing
 License:    ASL 2.0
 URL:        https://openimagedenoise.github.io/
@@ -79,6 +79,9 @@ rm -rf %{buildroot}%{_docdir}/OpenImageDenoise
 %{_libdir}/libOpenImageDenoise.so
 
 %changelog
+* Tue Mar 30 2021 Jonathan Wakely <jwakely@redhat.com> - 1.3.0-2
+- Rebuilt for removed libstdc++ symbol (#1937698)
+
 * Fri Feb 05 2021 Luya Tshimbalanga <luya@fedoraproject.org> - 1.3.0-1
 - Update to 1.3.0
 
