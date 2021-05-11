@@ -1,14 +1,16 @@
 # Force out of source build
-%undefine __cmake_in_source_build
+%undefine       __cmake_in_source_build
 
-Name:       oidn
-Version:    1.3.0
-Release:    3%{?dist}
-Summary:    Library of denoising filters for images rendered with ray tracing
-License:    ASL 2.0
-URL:        https://openimagedenoise.github.io/
+Name:           oidn
+Version:        1.3.0
+Release:        4%{?dist}
+Summary:        Library of denoising filters for images rendered with ray tracing
+License:        ASL 2.0
+URL:            https://openimagedenoise.github.io/
 
-Source0:    https://github.com/OpenImageDenoise/%{name}/releases/download/v%{version}/%{name}-%{version}.src.tar.gz
+Source0:        https://github.com/OpenImageDenoise/%{name}/releases/download/v%{version}/%{name}-%{version}.src.tar.gz
+
+Patch:          oidn-fix-compile-error.patch
 
 # Library only available on x86_64
 ExclusiveArch:  x86_64
@@ -24,30 +26,30 @@ BuildRequires:  pkgconfig(tbb)
 An open source library of high-performance, high-quality denoising filters for
 images rendered with ray tracing.
 
-%package    libs
-Summary:    Libraries for %{name}
+%package        libs
+Summary:        Libraries for %{name}
 
-%description libs
+%description    libs
 The %{name}-libs package contains shared library for %{name}.
 
-%package    devel
-Summary:    Development files for %{name}
-Requires:   %{name}-libs%{?_isa} = %{version}-%{release}
+%package        devel
+Summary:        Development files for %{name}
+Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 
 %description devel
 The %{name}-devel package contains libraries and header files for developing
 applications that use %{name}.
 
-%package    docs
-Summary:    Documentation for %{name}
-Requires:   %{name}-libs%{?_isa} = %{version}-%{release}
-BuildArch:  noarch
+%package        docs
+Summary:        Documentation for %{name}
+Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+BuildArch:      noarch
 
 %description docs
 The %{name}-docs package contains documentation for %{name}.
 
 %prep
-%autosetup
+%autosetup -p1
 
 %build
 %cmake \
@@ -79,6 +81,11 @@ rm -rf %{buildroot}%{_docdir}/OpenImageDenoise
 %{_libdir}/libOpenImageDenoise.so
 
 %changelog
+* Fri Feb 05 2021 Luya Tshimbalanga <luya@fedoraproject.org> - 1.3.0-4
+- Patch from upstream devel branch addressing glibc change
+- Fixes rhbz#1959312
+- Resolves: fedora#1945579
+
 * Mon May 10 2021 Jonathan Wakely <jwakely@redhat.com> - 1.3.0-3
 - Rebuilt for removed libstdc++ symbols (#1937698)
 
