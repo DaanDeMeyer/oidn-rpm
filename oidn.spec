@@ -10,6 +10,8 @@ URL:            https://openimagedenoise.github.io/
 
 Source0:        https://github.com/OpenImageDenoise/%{name}/releases/download/v%{version}/%{name}-%{version}.src.tar.gz
 
+# Create patch from upstream devel branch solving the glibc compilation issue
+# https://github.com/OpenImageDenoise/oidn/blob/devel/apps/catch.hpp
 Patch:          oidn-fix-compile-error.patch
 
 # Library only available on x86_64
