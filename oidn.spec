@@ -2,17 +2,13 @@
 %undefine       __cmake_in_source_build
 
 Name:           oidn
-Version:        1.3.0
-Release:        4%{?dist}
+Version:        1.4.0
+Release:        1%{?dist}
 Summary:        Library of denoising filters for images rendered with ray tracing
 License:        ASL 2.0
 URL:            https://openimagedenoise.github.io/
 
 Source0:        https://github.com/OpenImageDenoise/%{name}/releases/download/v%{version}/%{name}-%{version}.src.tar.gz
-
-# Create patch from upstream devel branch solving the glibc compilation issue
-# https://github.com/OpenImageDenoise/oidn/blob/devel/apps/catch.hpp
-Patch:          oidn-fix-compile-error.patch
 
 # Library only available on x86_64
 ExclusiveArch:  x86_64
@@ -83,7 +79,12 @@ rm -rf %{buildroot}%{_docdir}/OpenImageDenoise
 %{_libdir}/libOpenImageDenoise.so
 
 %changelog
-* Fri Feb 05 2021 Luya Tshimbalanga <luya@fedoraproject.org> - 1.3.0-4
+* Tue May 18 2021 Luya Tshimbalanga <luya@fedoraproject.org> - 1.4.0-1
+- Update to 1.4.0
+- Drop temporary patch from upstraem
+- Resolves rhbz#1961760
+
+* Fri May 14 2021 Luya Tshimbalanga <luya@fedoraproject.org> - 1.3.0-4
 - Patch from upstream devel branch addressing glibc change
 - Fixes rhbz#1959312
 - Resolves: fedora#1945579
