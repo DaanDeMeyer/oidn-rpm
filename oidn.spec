@@ -2,7 +2,7 @@
 %undefine       __cmake_in_source_build
 
 Name:           oidn
-Version:        1.4.0
+Version:        1.4.1
 Release:        1%{?dist}
 Summary:        Library of denoising filters for images rendered with ray tracing
 License:        ASL 2.0
@@ -79,6 +79,10 @@ rm -rf %{buildroot}%{_docdir}/OpenImageDenoise
 %{_libdir}/libOpenImageDenoise.so
 
 %changelog
+* Tue Jun 22 2021 luya@fedoraproject.org> - 1.4.1-1
+- Update to 1.4.1
+- Resolves rhbz#1975015
+
 * Tue May 18 2021 Luya Tshimbalanga <luya@fedoraproject.org> - 1.4.0-1
 - Update to 1.4.0
 - Drop temporary patch from upstraem
