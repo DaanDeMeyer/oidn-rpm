@@ -1,9 +1,6 @@
-# Force out of source build
-%undefine       __cmake_in_source_build
-
 Name:           oidn
-Version:        1.4.1
-Release:        3%{?dist}
+Version:        1.4.3
+Release:        %autorelease
 Summary:        Library of denoising filters for images rendered with ray tracing
 License:        ASL 2.0
 URL:            https://openimagedenoise.github.io/
@@ -14,6 +11,8 @@ Source0:        https://github.com/OpenImageDenoise/%{name}/releases/download/v%
 ExclusiveArch:  x86_64
 
 BuildRequires:  cmake >= 3.13.0
+# Needed to remove rpath from apps
+BuildRequires:  chrpath
 BuildRequires:  gcc-c++
 BuildRequires:  ispc
 BuildRequires:  pkgconfig(OpenImageIO)
@@ -59,6 +58,11 @@ The %{name}-docs package contains documentation for %{name}.
 %install
 %cmake_install
 
+# Remove rpath
+chrpath --delete %{buildroot}%{_bindir}/%{name}{Denoise,Test,Benchmark}
+chrpath --delete %{buildroot}%{_libdir}/libOpenImageDenoise.so.*
+
+
 # Remove duplicated documentation
 rm -rf %{buildroot}%{_docdir}/OpenImageDenoise
 
@@ -79,97 +83,4 @@ rm -rf %{buildroot}%{_docdir}/OpenImageDenoise
 %{_libdir}/libOpenImageDenoise.so
 
 %changelog
-* Thu Jan 20 2022 Fedora Release Engineering <releng@fedoraproject.org> - 1.4.1-3
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
-
-* Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 1.4.1-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
-
-* Tue Jun 22 2021 luya@fedoraproject.org> - 1.4.1-1
-- Update to 1.4.1
-- Resolves rhbz#1975015
-
-* Tue May 18 2021 Luya Tshimbalanga <luya@fedoraproject.org> - 1.4.0-1
-- Update to 1.4.0
-- Drop temporary patch from upstraem
-- Resolves rhbz#1961760
-
-* Fri May 14 2021 Luya Tshimbalanga <luya@fedoraproject.org> - 1.3.0-4
-- Patch from upstream devel branch addressing glibc change
-- Fixes rhbz#1959312
-- Resolves: fedora#1945579
-
-* Mon May 10 2021 Jonathan Wakely <jwakely@redhat.com> - 1.3.0-3
-- Rebuilt for removed libstdc++ symbols (#1937698)
-
-* Tue Mar 30 2021 Jonathan Wakely <jwakely@redhat.com> - 1.3.0-2
-- Rebuilt for removed libstdc++ symbol (#1937698)
-
-* Fri Feb 05 2021 Luya Tshimbalanga <luya@fedoraproject.org> - 1.3.0-1
-- Update to 1.3.0
-
-* Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 1.2.4-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
-
-* Tue Dec 01 2020 Luya Tshimbalanga <luya@fedoraproject.org> - 1.2.4-1
-- Update to 1.2.4
-
-* Sun Sep 13 2020 Luya Tshimbalanga <luya@fedoraproject.org> - 1.2.3-1
-- Update to 1.2.3
-- Follow new Fedora cmake guideline
-
-* Thu Aug 20 2020 Simone Caronni <negativo17@gmail.com> - 1.2.2-4
-- Move cmake files to devel subpackage.
-- rpmlint fixes.
-
-* Sat Aug 01 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1.2.2-3
-- Second attempt - Rebuilt for
-  https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
-
-* Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1.2.2-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
-
-* Mon Jul 13 2020 Luya Tshimbalanga <luya@fedoraproject.org> - 1.2.2-1
-- Update to 1.2.2 (#1855832)
-- Add OpenImageIO dependency
-
-* Tue Jun 16 2020 Luya Tshimbalanga <luya@fedoraproject.org> - 1.2.1-1
-- Update to 1.2.1
-
-* Fri Apr 10 2020 Luya Tshimbalanga <luya@fedoraproject.org> - 1.2.0-1
-- Update to 1.2.0
-- Add ispc and redhat-rpm-config depedencies
-
-* Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.0-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
-
-* Wed Oct 16 2019 Luya Tshimbalanga <luya@fedoraproject.org> - 1.1.0-1
-- Update to 1.1.0
-
-* Sat Aug 17 2019 Luya Tshimbalanga <luya@fedoraproject.org> - 1.0.0-1
-- Update to 1.0.0
-- Use pkgconfig for Python 3
-
-* Thu Jul 25 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.0-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
-
-* Thu May 09 2019 Luya Tshimbalanga <luya@fedoraproject.org> - 0.9.0-1
-- Update to 0.9.0
-
-* Tue Apr 02 2019 Luya Tshimbalanga <luya@fedoraproject.org> - 0.8.2-4
-- Use spaces on line 47
-- Make -doc subpackage noarch
-- Make -doc subpackage requiring main package
-
-* Mon Apr 01 2019 Luya Tshimbalanga <luya@fedoraproject.org> - 0.8.2-3
-- Move versioned so-files to libs subpackage
-- Move unversioned so-files to devel subpackage
-
-* Mon Apr 01 2019 Luya Tshimbalanga <luya@fedoraproject.org> - 0.8.2-2
-- Add subpackage for large doc files
-- Move .so files to devel subpackage
-- Fix library path
-- Remove unneeded clearance
-
-* Sun Mar 31 2019 Luya Tshimbalanga <luya@fedoraproject.org> - 0.8.2-1
-- Initial packaging
+%autochangelog
