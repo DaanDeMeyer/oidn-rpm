@@ -50,8 +50,7 @@ The %{name}-docs package contains documentation for %{name}.
 
 %build
 %cmake \
-    -DCMAKE_VERBOSE_MAKEFILE:BOOL=TRUE \
-    .
+    -DCMAKE_VERBOSE_MAKEFILE:BOOL=TRUE
 
 %cmake_build
 
